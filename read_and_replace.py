@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import glob
 
 def read_file(file, per):
