@@ -1,11 +1,8 @@
-#!/usr/bin/env python
-
-
-file_to_change = "RMS-res_2FBW_A-2H88_N.txt"
+import glob
 
 def read_file(file, per):
     with open(file, per) as file :
-        return file.read()     
+        return file.read()   
 
 def write_file(file, per, content):
     with open(file, per) as file :
@@ -16,7 +13,13 @@ def replace_all(content, dic):
         content = content.replace(i, j)
     return content
 
-reps = {'   A':'    ', '   N':'    '}
-file_content = read_file(file_to_change, 'r')
-pre_modified = replace_all(file_content, reps)
-write_file(file_to_change, 'w', pre_modified)
+
+for arch in glob.glob("RMS*"):
+    first = arch[13]
+    second = arch[20]
+    reps = {'   '+first:'    ', '   '+second:'    '}
+    file_content = read_file(arch, 'r')
+    pre_modified = replace_all(file_content, reps)
+    write_file(arch, 'w', pre_modified)
+
+print "ok McKay"
